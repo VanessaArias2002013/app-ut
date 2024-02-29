@@ -72,3 +72,6 @@ section {
   justify-content: center;
   width: 120px;
 }
+*, ::before, ::after {
+  border-style: none;
+}
