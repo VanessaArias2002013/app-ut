@@ -1,11 +1,14 @@
-
 import { Routes } from '@angular/router';
 import { FoodListComponent } from './food-list/food-list.component';
+import { FormFoodComponent } from './form-food/form-food.component';
 
-
-
-const routes: Routes = [
-    { path: 'food-list', component: FoodListComponent },
-];
-
-export default routes;
+export default [
+  {
+     path: 'food-list',
+      component: FoodListComponent
+    },
+    {
+    path: 'form',
+    component: FormFoodComponent
+    }
+    ]
