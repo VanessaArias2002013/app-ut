@@ -86,16 +86,24 @@ export class FoodService {
     return this.menu;
   }
 
+
+  //obtener comida del arrjlo
+  public getOne(id:number): Food | undefined {
+   return this.menu.find(item => item.id ==id);
+  }
+
+
+
   //añadir foods
   public addFood(food: Food) {
     this.menu.push(food);
   }
 
   //actualizar food
-  public update(newFood: Food) {
+  public updateFood(newFood: Food) {
     this.menu.forEach((food, index) => {
       if (food.id == newFood.id) {
-        food = newFood;
+       this.menu[index] = newFood;
       }
     })
   }
