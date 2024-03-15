@@ -1,6 +1,11 @@
+<div class="max-w-5xl flex flex-col lg:flex-row gap-4 items-center">
+
 <form [formGroup]="form" class="max-w-3xl p-4">
   <!---campo de nombre-->
-  <div>
+
+  <h1 class="text-lg font-bold text-slate-800 pb-4"> {{edit ? 'Editar comida': 'Añadir nueva comida'}}</h1>
+
+  <div class="w-full">
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Nombre</mat-label>
       <input matInput placeholder="ejem.Pizza" formControlName="name" />
@@ -124,6 +129,12 @@
     </mat-form-field>
   </div>
 
-  <button mat-raised-button color="primary"  [disabled]="!form.valid" (click)="sendData()">Enviar</button>
+  <button mat-raised-button color="primary"  [disabled]="!form.valid" (click)="edit? updateData(): sendData() ">{{edit? 'Actualizar': 'Enviar' }}</button>
 
 </form>
+
+<div class="w-full lg:w-1/2">
+  <img class="aspect-video object-cover bg-no-repeat rounded-lg" src="{{ image?.value}}" alt="" srcset="">
+</div>
+
+</div>
