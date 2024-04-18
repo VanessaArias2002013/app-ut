@@ -16,25 +16,30 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class DetailsFoodComponent implements OnInit {
 
-
-  constructor(public foodservice:FoodService) {
-
+ 
+  constructor(private activeRoute:ActivatedRoute, public serviceFood:FoodService){
   }
-  activedRoute:ActivatedRoute = inject(ActivatedRoute);
+  route:ActivatedRoute = inject(ActivatedRoute);
   foodId:number = -1;
   food?:Food = {
+    id:0,
     name:'',
-    description:'',
-    image:'',
+    description:'', 
     category:'',
+    image:'',
     price:0
   }
 
-
-
-
   ngOnInit(): void {
- this.foodId = Number(this.activedRoute.snapshot.params['id']);
- this.food = this.foodservice.getOne(this.foodId);
+   
+    this.foodId =Number(this.route.snapshot.params['id']);
+    this.serviceFood.getOneFood(this.foodId).subscribe({
+      next:(value)=> (this.food = value),
+      error:(e) => console.error(e),
+      complete:()=> console.info('complete'),
+    })
+
   }
+
+
 }

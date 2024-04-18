@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Food } from './food.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.development';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -80,8 +83,30 @@ export class FoodService {
     },
   ];
 
-  constructor() {}
+API_URL:string='';
 
+  constructor(private http:HttpClient) {
+    this.API_URL = `${environment.API_URL}`
+
+  }
+   //funciona para obtener todas las comidas
+   public getAll():Observable<Food[]>{
+    return this.http.get<Food[]>(this.API_URL+'food/all');
+  }
+
+  //Funcion para agregar una comida
+  public addFood(food:Food):Observable<Food>{
+     return this.http.post<Food>(this.API_URL+'food/save',food);
+  }
+
+  public getOneFood(id:number):Observable<Food>{
+    return this.http.get<Food>(this.API_URL+'food/find/'+id);
+  }
+
+  public deleteFood(deleteFood:Food):Observable<unknown>{
+    return this.http.delete(this.API_URL + 'food/delete/'+deleteFood.id);
+  }
+/*
   public getAllFoods(): Food[] {
     return this.menu;
   }
@@ -116,5 +141,6 @@ export class FoodService {
         this.menu.splice(index,1);
       }
     })
-  }
+  }*/
+
 }
